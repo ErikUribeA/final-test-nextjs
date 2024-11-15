@@ -6,11 +6,12 @@ import './styles/table.sass';
 import Image from 'next/image';
 import './styles/style.sass';
 import { Icon } from '@iconify/react';
+import { useRouter } from 'next/navigation';
 
 interface TableProps {
     data: IVehicule[];
     // onEdit: (id: number, data: IVehicule[]) => void;
-    // onDelete: (id: number) => void;
+    onDelete: (id: number) => void;
 }
 
 interface ApiResponse {
@@ -22,9 +23,10 @@ interface ApiResponse {
     };
 }
 
-export default function TableVehicules({ data }: TableProps) {
+export default function TableVehicules({ data, onDelete}: TableProps) {
     const [filteredData, setFilteredData] = useState<IVehicule[]>(data);
     const [isSearching, setIsSearching] = useState(false);
+    const router = useRouter()
 
     // Estado para los filtros individuales
     const [filters, setFilters] = useState({
@@ -92,7 +94,11 @@ export default function TableVehicules({ data }: TableProps) {
             make: '',
             model: '',
         });
-        setFilteredData(data); // Restaurar la data original
+        setFilteredData(data); 
+    };
+
+    const navigateToHistory = (id: number) => {
+        router.push(`/dashboard/vehicule/${id}`); 
     };
 
     return (
@@ -189,7 +195,7 @@ export default function TableVehicules({ data }: TableProps) {
 
                                         <button
                                             
-                                        // onClick={() => onDelete(vehicule.id)}
+                                        onClick={() => onDelete(vehicule.id)}
                                         >
                                             <Icon icon="tabler:trash" className="flex m-auto text-[1.5em] text-gray-400" />
                                         </button>

@@ -1,10 +1,11 @@
 "use client";
 import { IResponseVehicules } from "@/app/core/application/dto";
+import { IResponseMaintenance } from "@/app/core/application/dto/maintenance/maintenance-response.dto";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 interface IProps {
-    data: IResponseVehicules;
+    data: IResponseVehicules | IResponseMaintenance ;
 }
 
 function Pagination({ data }: IProps) {

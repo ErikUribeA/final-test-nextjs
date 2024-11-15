@@ -36,3 +36,4 @@ export interface Data {
     photo:        null;
     id:           number;
 }
+
